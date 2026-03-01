@@ -1,7 +1,30 @@
+using Microsoft.EntityFrameworkCore;
+using sinpe_empresarial_aspnet.Business;
+using sinpe_empresarial_aspnet.Data;
+using sinpe_empresarial_aspnet.Repositories;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseMySql(
+        builder.Configuration.GetConnectionString("MysqlConnection"),
+        ServerVersion.AutoDetect(
+            builder.Configuration.GetConnectionString("MysqlConnection")
+        )
+    );
+});
+
+
+builder.Services.AddScoped<IComerciosRepository, ComerciosRepository>();
+builder.Services.AddScoped<ComerciosBussiness>();
+//Repositorio
+//CapaBussine
+//Nota:hacer uno de estos de sus partes
+
 
 var app = builder.Build();
 
