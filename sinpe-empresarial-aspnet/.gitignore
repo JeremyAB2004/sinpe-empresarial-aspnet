@@ -1,0 +1,15 @@
+# Ignorar archivos de Visual Studio
+.vs/
+.vscode/
+*.vsix
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+
+# Ignorar archivos de compilación
+bin/
+obj/
+
+# Ignorar archivos de dependencias 
+node_modules/
