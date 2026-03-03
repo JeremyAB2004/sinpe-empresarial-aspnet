@@ -1,0 +1,51 @@
+﻿@model IEnumerable<sinpe_empresarial_aspnet.Models.Cajas>
+@{
+    var idComercio = (int)ViewBag.IdComercio;
+}
+
+<h2>Cajas</h2>
+
+<a class="btn btn-primary" asp-action="Create" asp-route-idComercio="@idComercio">Registrar Caja</a>
+
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Teléfono SINPE</th>
+            <th>Fecha de registro</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var caja in Model)
+        {
+            <tr>
+                <td>@caja.Nombre</td>
+                <td>
+                    @{
+                        var desc = caja.Descripcion ?? "";
+                        if (desc.Length > 10)
+                        {
+                            @($"{desc.Substring(0, 10)}...")
+                        }
+                        else
+                        {
+                            @desc
+                        }
+                    }
+                </td>
+                <td>@caja.TelefonoSINPE</td>
+                <td>@caja.FechaDeRegistro</td>
+                <td>@(caja.Estado ? "Activo" : "Inactivo")</td>
+                <td>
+                    <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@caja.IdCaja">Editar</a>
+                    <!-- Ver SINPE lo activamos cuando exista ese módulo -->
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a class="btn btn-secondary" asp-controller="Comercios" asp-action="Index">Volver a Comercios</a>

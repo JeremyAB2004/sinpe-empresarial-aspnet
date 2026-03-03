@@ -1,0 +1,70 @@
+﻿@model IEnumerable<sinpe_empresarial_aspnet.Models.Comercios>
+
+@{
+    ViewBag.Title = "Listado de Comercios";
+}
+
+<h2>Listado de Comercios</h2>
+
+<a class="btn btn-primary"
+   asp-action="Create"
+   role="button">Registrar Comercio</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Identificación</th>
+            <th>Tipo Identificación</th>
+            <th>Nombre</th>
+            <th>Tipo Comercio</th>
+            <th>Teléfono</th>
+            <th>Correo Electrónico</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var comercio in Model)
+        {
+            <tr>
+                <td>@comercio.Identificacion</td>
+                <td>@(comercio.TipoIdentificacion == 1 ? "Física" : "Jurídica")</td>
+                <td>@comercio.Nombre</td>
+                <td>
+                    @if (comercio.TipoDeComercio == 1)
+                    {
+                        @("Restaurante")
+                    }
+                    else if (comercio.TipoDeComercio == 2)
+                    {
+                        @("Supermercado")
+                    }
+                    else if (comercio.TipoDeComercio == 3)
+                    {
+                        @("Ferretería")
+                    }
+                    else
+                    {
+                        @("Otro")
+                    }
+                </td>
+                <td>@comercio.Telefono</td>
+                <td>@comercio.CorreoElectronico</td>
+                <td>@(comercio.Estado ? "Activo" : "Inactivo")</td>
+                <td>
+                    <a class="btn btn-warning"
+                       asp-action="Edit" asp-route-id="@comercio.IdComercio"
+                       role="button">Editar</a>
+
+                    <a class="btn btn-success"
+                       asp-action="Details" asp-route-id="@comercio.IdComercio"
+                       role="button">Detalles</a>
+
+                    <a class="btn btn-info"
+                       asp-action="Index" asp-controller="Cajas" asp-route-idComercio="@comercio.IdComercio"
+                       role="button">Ver Cajas</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

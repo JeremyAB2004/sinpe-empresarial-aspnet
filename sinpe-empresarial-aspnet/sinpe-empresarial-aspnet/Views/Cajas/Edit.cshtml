@@ -1,0 +1,38 @@
+﻿@model sinpe_empresarial_aspnet.Models.Cajas
+
+<h2>Editar Caja</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="IdCaja" />
+    <input type="hidden" asp-for="IdComercio" />
+    <input type="hidden" asp-for="FechaDeRegistro" />
+
+    <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input class="form-control" asp-for="Nombre" />
+        <span class="text-danger" asp-validation-for="Nombre"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Descripción</label>
+        <input class="form-control" asp-for="Descripcion" />
+        <span class="text-danger" asp-validation-for="Descripcion"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Teléfono SINPE</label>
+        <input class="form-control" asp-for="TelefonoSINPE" />
+        <span class="text-danger" asp-validation-for="TelefonoSINPE"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Estado</label>
+        <select class="form-select" asp-for="Estado">
+            <option value="true">Activo</option>
+            <option value="false">Inactivo</option>
+        </select>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Actualizar</button>
+    <a class="btn btn-secondary" asp-action="Index" asp-route-idComercio="@Model.IdComercio">Cancelar</a>
+</form>
