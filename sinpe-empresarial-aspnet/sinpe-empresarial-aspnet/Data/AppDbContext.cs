@@ -9,5 +9,6 @@ namespace sinpe_empresarial_aspnet.Data
         }
          public DbSet<Models.Comercios> Comercios { get; set; }
          public DbSet<Models.Cajas> Cajas { get; set; }
+         public DbSet<Models.Sinpe> Sinpe { get; set; }
     }
 }

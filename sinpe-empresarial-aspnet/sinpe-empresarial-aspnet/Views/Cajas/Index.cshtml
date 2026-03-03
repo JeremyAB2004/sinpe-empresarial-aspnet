@@ -41,7 +41,12 @@
                 <td>@(caja.Estado ? "Activo" : "Inactivo")</td>
                 <td>
                     <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@caja.IdCaja">Editar</a>
-                    <!-- Ver SINPE lo activamos cuando exista ese módulo -->
+                    <a class="btn btn-info btn-sm"
+                       asp-action="VerSinpe"
+                       asp-route-idCaja="@caja.IdCaja"
+                       asp-route-idComercio="@idComercio">
+                        Ver SINPE
+                    </a>
                 </td>
             </tr>
         }

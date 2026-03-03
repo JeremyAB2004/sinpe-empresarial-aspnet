@@ -7,10 +7,12 @@ namespace sinpe_empresarial_aspnet.Controllers
     public class CajasController : Controller
     {
         private readonly CajasBusiness _cajasBusiness;
+        private readonly SinpeBusiness _sinpeBusiness;
 
-        public CajasController(CajasBusiness cajasBusiness)
+        public CajasController(CajasBusiness cajasBusiness, SinpeBusiness sinpeBusiness)
         {
             _cajasBusiness = cajasBusiness;
+            _sinpeBusiness = sinpeBusiness;
         }
 
         // Ver Cajas
@@ -45,7 +47,7 @@ namespace sinpe_empresarial_aspnet.Controllers
                 return View(caja);
             }
 
-            // Teléfono único en cajas ACTIVAS global
+            // Teléfono único en cajas ACTIVAS 
             if (_cajasBusiness.ExisteTelefonoActivo(caja.TelefonoSINPE, 0))
             {
                 ModelState.AddModelError("TelefonoSINPE", "Ya existe una caja ACTIVA con este teléfono SINPE.");
@@ -72,14 +74,14 @@ namespace sinpe_empresarial_aspnet.Controllers
             if (!ModelState.IsValid)
                 return View(caja);
 
-            // Nombre único por comercio (excluyendo esta caja)
+            // Nombre único por comercio
             if (_cajasBusiness.ExisteNombrePorComercio(caja.IdComercio, caja.Nombre, caja.IdCaja))
             {
                 ModelState.AddModelError("Nombre", "Ya existe una caja con este nombre para este comercio.");
                 return View(caja);
             }
 
-            // Teléfono único global en activos, SOLO si la caja quedará activa
+            // Teléfono único global en activos
             if (caja.Estado && _cajasBusiness.ExisteTelefonoActivo(caja.TelefonoSINPE, caja.IdCaja))
             {
                 ModelState.AddModelError("TelefonoSINPE", "Ya existe una caja ACTIVA con este teléfono SINPE.");
@@ -88,6 +90,18 @@ namespace sinpe_empresarial_aspnet.Controllers
 
             _cajasBusiness.UpdateCaja(caja);
             return RedirectToAction(nameof(Index), new { idComercio = caja.IdComercio });
+        }
+
+public IActionResult VerSinpe(int idCaja, int idComercio)
+        {
+            var caja = _cajasBusiness.GetCajaById(idCaja);
+            if (caja == null) return NotFound();
+
+            ViewBag.IdComercio = idComercio;
+            ViewBag.TelefonoSINPE = caja.TelefonoSINPE;
+
+            var sinpes = _sinpeBusiness.GetSinpeByTelefonoDestinatario(caja.TelefonoSINPE);
+            return View(sinpes);
         }
     }
 

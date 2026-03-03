@@ -1,0 +1,39 @@
+﻿@model IEnumerable<sinpe_empresarial_aspnet.Models.Sinpe>
+
+<h2>SINPE recibidos (Caja: @ViewBag.TelefonoSINPE)</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Teléfono origen</th>
+            <th>Nombre origen</th>
+            <th>Teléfono destinatario</th>
+            <th>Nombre destinatario</th>
+            <th>Monto</th>
+            <th>Descripción</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var s in Model)
+        {
+            <tr>
+                <td>@s.TelefonoOrigen</td>
+                <td>@s.NombreOrigen</td>
+                <td>@s.TelefonoDestinatario</td>
+                <td>@s.NombreDestinatario</td>
+                <td>@s.Monto</td>
+                <td>@(string.IsNullOrEmpty(s.Descripcion) ? "-" : s.Descripcion)</td>
+                <td>@s.FechaDeRegistro</td>
+                <td>@(s.Estado ? "Sincronizado" : "No sincronizado")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a class="btn btn-secondary"
+   asp-action="Index"
+   asp-route-idComercio="@ViewBag.IdComercio">
+    Volver a Cajas
+</a>

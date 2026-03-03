@@ -25,6 +25,9 @@ builder.Services.AddScoped<ComerciosBusiness>();
 builder.Services.AddScoped<ICajasRepository, CajasRepository>();
 builder.Services.AddScoped<CajasBusiness>();
 
+builder.Services.AddScoped<ISinpeRepository, SinpeRepository>();
+builder.Services.AddScoped<SinpeBusiness>();
+
 //Repositorio
 //CapaBussine
 //Nota:hacer uno de estos de sus partes
