@@ -1,0 +1,43 @@
+﻿@model List<sinpe_empresarial_aspnet.Models.BitacoraEventos>
+
+@{
+    ViewData["Title"] = "Bitácora de Eventos";
+}
+
+<h2>Bitácora de Eventos</h2>
+
+<table class="table table-bordered table-striped table-sm">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Tabla</th>
+            <th>Tipo</th>
+            <th>Fecha</th>
+            <th>Descripción</th>
+            <th>StackTrace</th>
+            <th>Datos Anteriores</th>
+            <th>Datos Posteriores</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var e in Model)
+        {
+            <tr>
+                <td>@e.IdEvento</td>
+                <td>@e.TablaDeEvento</td>
+                <td>@e.TipoDeEvento</td>
+                <td>@e.FechaDeEvento.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                <td>@e.DescripcionDeEvento</td>
+                <td style="max-width:150px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                    @e.StackTrace
+                </td>
+                <td style="max-width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                    @e.DatosAnteriores
+                </td>
+                <td style="max-width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                    @e.DatosPosteriores
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

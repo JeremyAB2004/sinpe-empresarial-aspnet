@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
 using sinpe_empresarial_aspnet.Data;
 using sinpe_empresarial_aspnet.Models;
 
@@ -20,7 +21,10 @@ namespace sinpe_empresarial_aspnet.Repositories
 
         public Comercios GetComercioById(int id)
         {
-            return _context.Comercios.Find(id);
+            // AsNoTracking evita que EF devuelva el objeto ya modificado en memoria
+            return _context.Comercios
+                .AsNoTracking()
+                .FirstOrDefault(c => c.IdComercio == id);
         }
 
         public bool ExisteIdentificacion(string identificacion, int idComercio)

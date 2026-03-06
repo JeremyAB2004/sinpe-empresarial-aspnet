@@ -1,4 +1,5 @@
-﻿using sinpe_empresarial_aspnet.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using sinpe_empresarial_aspnet.Data;
 using sinpe_empresarial_aspnet.Models;
 
 namespace sinpe_empresarial_aspnet.Repositories
@@ -19,7 +20,7 @@ namespace sinpe_empresarial_aspnet.Repositories
 
         public Cajas GetCajaById(int idCaja)
         {
-            return _context.Cajas.Find(idCaja);
+            return _context.Cajas.AsNoTracking().FirstOrDefault(c => c.IdCaja == idCaja);
         }
 
         public bool ExisteNombrePorComercio(int idComercio, string nombre, int idCaja)
