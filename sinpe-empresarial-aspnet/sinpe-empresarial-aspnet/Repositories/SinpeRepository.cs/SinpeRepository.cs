@@ -19,5 +19,11 @@ namespace sinpe_empresarial_aspnet.Repositories
                 .OrderByDescending(s => s.FechaDeRegistro)
                 .ToList();
         }
+
+        public void AddSinpe(Sinpe sinpe)
+        {
+            _context.Sinpe.Add(sinpe);
+            _context.SaveChanges();
+        }
     }
 }

@@ -31,13 +31,118 @@
                 <td style="max-width:150px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
                     @e.StackTrace
                 </td>
-                <td style="max-width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
-                    @e.DatosAnteriores
+                <td>
+                    @if (!string.IsNullOrEmpty(e.DatosAnteriores))
+                    {
+                        <button class="btn btn-sm btn-warning"
+                                onclick="abrirModal(@e.IdEvento, 'anterior')">
+                            Ver
+                        </button>
+                    }
+                    else { <span class="text-muted">—</span> }
                 </td>
-                <td style="max-width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
-                    @e.DatosPosteriores
+                <td>
+                    @if (!string.IsNullOrEmpty(e.DatosPosteriores))
+                    {
+                        <button class="btn btn-sm btn-info"
+                                onclick="abrirModal(@e.IdEvento, 'posterior')">
+                            Ver
+                        </button>
+                    }
+                    else { <span class="text-muted">—</span> }
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+<!-- Modal -->
+<div class="modal fade" id="modalDatos" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitulo">Datos</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="modalCuerpo"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    const eventos = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.Select(e => new {
+        id               = e.IdEvento,
+        tipo             = e.TipoDeEvento,
+        datosAnteriores  = e.DatosAnteriores,
+        datosPosteriores = e.DatosPosteriores
+    })));
+
+    function abrirModal(idEvento, modo) {
+        const ev = eventos.find(e => e.id === idEvento);
+        if (!ev) return;
+
+        const tieneAntes   = ev.datosAnteriores  && ev.datosAnteriores  !== 'null';
+        const tieneDespues = ev.datosPosteriores && ev.datosPosteriores !== 'null';
+        const esEditar     = ev.tipo?.toLowerCase() === 'editar' && tieneAntes && tieneDespues;
+
+        const titulo = document.getElementById('modalTitulo');
+        const cuerpo = document.getElementById('modalCuerpo');
+
+        if (esEditar) {
+            titulo.textContent = 'Comparación de cambios';
+            const antes   = parseJson(ev.datosAnteriores);
+            const despues = parseJson(ev.datosPosteriores);
+            cuerpo.innerHTML = renderComparacion(antes, despues);
+        } else if (modo === 'anterior') {
+            titulo.textContent = 'Datos Anteriores';
+            cuerpo.innerHTML = renderTabla(parseJson(ev.datosAnteriores));
+        } else {
+            titulo.textContent = 'Datos Posteriores';
+            cuerpo.innerHTML = renderTabla(parseJson(ev.datosPosteriores));
+        }
+
+        new bootstrap.Modal(document.getElementById('modalDatos')).show();
+    }
+
+    function parseJson(str) {
+        try { return JSON.parse(str); } catch { return null; }
+    }
+
+    function formatVal(v) {
+        if (v === null || v === undefined) return '<em class="text-muted">null</em>';
+        if (typeof v === 'boolean') return v ? 'Activo' : 'Inactivo';
+        return String(v);
+    }
+
+    function renderTabla(datos) {
+        if (!datos) return '<p class="text-muted">Sin datos disponibles.</p>';
+        const filas = Object.entries(datos).map(([k, v]) =>
+            `<tr><th>${k}</th><td>${formatVal(v)}</td></tr>`
+        ).join('');
+        return `<table class="table table-bordered table-sm">${filas}</table>`;
+    }
+
+    function renderComparacion(antes, despues) {
+        if (!antes || !despues) return '<p class="text-muted">Datos insuficientes.</p>';
+        const keys = [...new Set([...Object.keys(antes), ...Object.keys(despues)])];
+        const filas = keys.map(k => {
+            const cambio = JSON.stringify(antes[k]) !== JSON.stringify(despues[k]);
+            return `<tr>
+                <th>${k}</th>
+                <td class="${cambio ? 'table-warning' : ''}">${formatVal(antes[k])}</td>
+                <td class="${cambio ? 'table-success' : ''}">${formatVal(despues[k])}</td>
+            </tr>`;
+        }).join('');
+        return `<table class="table table-bordered table-sm">
+            <thead class="table-dark">
+                <tr><th>Campo</th><th>Antes</th><th>Después</th></tr>
+            </thead>
+            <tbody>${filas}</tbody>
+        </table>`;
+    }
+</script>
+}
