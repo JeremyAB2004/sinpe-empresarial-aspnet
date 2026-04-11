@@ -1,11 +1,10 @@
-﻿@model IEnumerable<sinpe_empresarial_aspnet.Models.Cajas>
-@{
-    var idComercio = (int)ViewBag.IdComercio;
+﻿@{
+    ViewBag.Title = "Cajas";
 }
 
 <h2>Cajas</h2>
 
-<a class="btn btn-primary" asp-action="Create" asp-route-idComercio="@idComercio">Registrar Caja</a>
+<a class="btn btn-primary" id="btnRegistrarCaja" href="#">Registrar Caja</a>
 
 <table class="table table-striped mt-3">
     <thead>
@@ -13,46 +12,58 @@
             <th>Nombre</th>
             <th>Descripción</th>
             <th>Teléfono SINPE</th>
-            <th>Fecha de registro</th>
+            <th>Fecha de Registro</th>
             <th>Estado</th>
             <th>Acciones</th>
         </tr>
     </thead>
-    <tbody>
-        @foreach (var caja in Model)
-        {
-            <tr>
-                <td>@caja.Nombre</td>
-                <td>
-                    @{
-                        var desc = caja.Descripcion ?? "";
-                        if (desc.Length > 10)
-                        {
-                            @($"{desc.Substring(0, 10)}...")
-                        }
-                        else
-                        {
-                            @desc
-                        }
-                    }
-                </td>
-                <td>@caja.TelefonoSINPE</td>
-                <td>@caja.FechaDeRegistro</td>
-                <td>@(caja.Estado ? "Activo" : "Inactivo")</td>
-                <td>
-                    <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@caja.IdCaja">Editar</a>
-                    <a class="btn btn-info btn-sm"
-                       asp-action="VerSinpe"
-                       asp-route-idCaja="@caja.IdCaja"
-                       asp-route-idComercio="@idComercio">
-                        Ver SINPE
-                    </a>
-                </td>
-            </tr>
-        }
-    </tbody>
+    <tbody id="bodyCajas"></tbody>
 </table>
 
-<a class="btn btn-secondary" asp-controller="Comercios" asp-action="Index">Volver a Comercios</a>
+<a href="/Comercios/Index" class="btn btn-secondary">Volver a Comercios</a>
 
-      
+@section Scripts {
+    <script>
+        const API = "https://localhost:7004";
+
+        // ID del comercio viene en la URL: /Cajas/Index/3
+        const idComercio = parseInt(window.location.pathname.split("/").pop());
+
+        $("#btnRegistrarCaja").attr("href", `/Cajas/Create/${idComercio}`);
+
+        function cargarCajas() {
+            $.ajax({
+                url: `${API}/api/Cajas/${idComercio}`,
+                method: "GET",
+                success: function(data) {
+                    let filas = "";
+                    data.forEach(c => {
+                        const desc = c.descripcion?.length > 10
+                            ? c.descripcion.substring(0, 10) + "..."
+                            : c.descripcion ?? "";
+                        const fecha = new Date(c.fechaDeRegistro).toLocaleDateString("es-CR");
+                        filas += `<tr>
+                                <td>${c.nombre}</td>
+                                <td>${desc}</td>
+                                <td>${c.telefonoSINPE}</td>
+                                <td>${fecha}</td>
+                                <td>${c.estado ? "Activo" : "Inactivo"}</td>
+                                <td>
+                                    <a class="btn btn-warning btn-sm" href="/Cajas/Edit/${c.idCaja}">Editar</a>
+                                    <a class="btn btn-info btn-sm" href="/Cajas/VerSinpe/${c.idCaja}?idComercio=${idComercio}">Ver SINPE</a>
+                                </td>
+                            </tr>`;
+                    });
+                    $("#bodyCajas").html(filas);
+                },
+                error: function() {
+                    alert("Error al cargar las cajas.");
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            cargarCajas();
+        });
+    </script>
+}

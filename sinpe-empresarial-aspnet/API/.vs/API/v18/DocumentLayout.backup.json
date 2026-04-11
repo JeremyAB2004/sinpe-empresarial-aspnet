@@ -1,0 +1,314 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|c:\\programacionavanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\api\\api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|solutionrelative:api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|c:\\programacionavanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\api\\api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|solutionrelative:api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|c:\\programacionavanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\api\\api\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|solutionrelative:api\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|c:\\programacionavanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\api\\api\\controllers\\bitacoracontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|solutionrelative:api\\controllers\\bitacoracontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|c:\\programacionavanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\api\\api\\services\\bitacoraservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|solutionrelative:api\\services\\bitacoraservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|c:\\programacionavanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\api\\api\\model\\bitacoraeventosmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|solutionrelative:api\\model\\bitacoraeventosmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|c:\\programacionavanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\api\\api\\controllers\\sinpecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|solutionrelative:api\\controllers\\sinpecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|c:\\programacionavanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\api\\api\\services\\sinpeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|solutionrelative:api\\services\\sinpeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|c:\\programacionavanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\api\\api\\model\\sinpemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|solutionrelative:api\\model\\sinpemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|c:\\programacionavanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\api\\api\\controllers\\cajascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|solutionrelative:api\\controllers\\cajascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|c:\\programacionavanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\api\\api\\services\\cajasservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|solutionrelative:api\\services\\cajasservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|c:\\programacionavanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\api\\api\\model\\cajasmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|solutionrelative:api\\model\\cajasmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|c:\\programacionavanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\api\\api\\controllers\\comercioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|solutionrelative:api\\controllers\\comercioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|c:\\programacionavanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\api\\api\\model\\comerciosmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|solutionrelative:api\\model\\comerciosmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|c:\\programacionavanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\api\\api\\services\\comerciosservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|solutionrelative:api\\services\\comerciosservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|c:\\programacionavanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\api\\api\\model\\productomodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|solutionrelative:api\\model\\productomodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|c:\\programacionavanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\api\\api\\services\\productoserice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|solutionrelative:api\\services\\productoserice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|c:\\programacionavanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\api\\api\\controllers\\productoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C60F3EFE-47F6-404B-87CB-A81CE3DEFD66}|API\\API.csproj|solutionrelative:api\\controllers\\productoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\appsettings.json",
+              "RelativeDocumentMoniker": "API\\appsettings.json",
+              "ToolTip": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\appsettings.json",
+              "RelativeToolTip": "API\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-04-11T01:47:03.928Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "BitacoraEventosModel.cs",
+              "DocumentMoniker": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Model\\BitacoraEventosModel.cs",
+              "RelativeDocumentMoniker": "API\\Model\\BitacoraEventosModel.cs",
+              "ToolTip": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Model\\BitacoraEventosModel.cs",
+              "RelativeToolTip": "API\\Model\\BitacoraEventosModel.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwB8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-11T01:33:08.734Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "BitacoraService.cs",
+              "DocumentMoniker": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Services\\BitacoraService.cs",
+              "RelativeDocumentMoniker": "API\\Services\\BitacoraService.cs",
+              "ToolTip": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Services\\BitacoraService.cs",
+              "RelativeToolTip": "API\\Services\\BitacoraService.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAgwBUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-11T01:33:20.813Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BitacoraController.cs",
+              "DocumentMoniker": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Controllers\\BitacoraController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\BitacoraController.cs",
+              "ToolTip": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Controllers\\BitacoraController.cs",
+              "RelativeToolTip": "API\\Controllers\\BitacoraController.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAA1wBcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-11T01:33:37.277Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Program.cs",
+              "RelativeDocumentMoniker": "API\\Program.cs",
+              "ToolTip": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Program.cs",
+              "RelativeToolTip": "API\\Program.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAYwCkAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-11T01:18:27.853Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "API\\Data\\AppDbContext.cs",
+              "ToolTip": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "API\\Data\\AppDbContext.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABUAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-11T01:00:38.306Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SinpeController.cs",
+              "DocumentMoniker": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Controllers\\SinpeController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\SinpeController.cs",
+              "ToolTip": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Controllers\\SinpeController.cs",
+              "RelativeToolTip": "API\\Controllers\\SinpeController.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwB8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-11T01:32:55.895Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "SinpeService.cs",
+              "DocumentMoniker": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Services\\SinpeService.cs",
+              "RelativeDocumentMoniker": "API\\Services\\SinpeService.cs",
+              "ToolTip": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Services\\SinpeService.cs",
+              "RelativeToolTip": "API\\Services\\SinpeService.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwB8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-11T01:32:40.983Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "SinpeModel.cs",
+              "DocumentMoniker": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Model\\SinpeModel.cs",
+              "RelativeDocumentMoniker": "API\\Model\\SinpeModel.cs",
+              "ToolTip": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Model\\SinpeModel.cs",
+              "RelativeToolTip": "API\\Model\\SinpeModel.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAgwCAAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-11T01:32:31.639Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "CajasController.cs",
+              "DocumentMoniker": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Controllers\\CajasController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\CajasController.cs",
+              "ToolTip": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Controllers\\CajasController.cs",
+              "RelativeToolTip": "API\\Controllers\\CajasController.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAgwEIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-11T01:31:21.611Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "CajasService.cs",
+              "DocumentMoniker": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Services\\CajasService.cs",
+              "RelativeDocumentMoniker": "API\\Services\\CajasService.cs",
+              "ToolTip": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Services\\CajasService.cs",
+              "RelativeToolTip": "API\\Services\\CajasService.cs",
+              "ViewState": "AgIAADsAAAAAAAAAAAAgwEoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-11T01:31:07.872Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "CajasModel.cs",
+              "DocumentMoniker": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Model\\CajasModel.cs",
+              "RelativeDocumentMoniker": "API\\Model\\CajasModel.cs",
+              "ToolTip": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Model\\CajasModel.cs",
+              "RelativeToolTip": "API\\Model\\CajasModel.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAgwCAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-11T01:32:19.798Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ComerciosController.cs",
+              "DocumentMoniker": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Controllers\\ComerciosController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\ComerciosController.cs",
+              "ToolTip": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Controllers\\ComerciosController.cs",
+              "RelativeToolTip": "API\\Controllers\\ComerciosController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-11T01:23:16.668Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ComerciosService.cs",
+              "DocumentMoniker": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Services\\ComerciosService.cs",
+              "RelativeDocumentMoniker": "API\\Services\\ComerciosService.cs",
+              "ToolTip": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Services\\ComerciosService.cs",
+              "RelativeToolTip": "API\\Services\\ComerciosService.cs",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAAAEgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-11T01:22:35.53Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ComerciosModel.cs",
+              "DocumentMoniker": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Model\\ComerciosModel.cs",
+              "RelativeDocumentMoniker": "API\\Model\\ComerciosModel.cs",
+              "ToolTip": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Model\\ComerciosModel.cs",
+              "RelativeToolTip": "API\\Model\\ComerciosModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-11T01:21:20.375Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ProductoSerice.cs",
+              "DocumentMoniker": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Services\\ProductoSerice.cs",
+              "RelativeDocumentMoniker": "API\\Services\\ProductoSerice.cs",
+              "ToolTip": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Services\\ProductoSerice.cs",
+              "RelativeToolTip": "API\\Services\\ProductoSerice.cs",
+              "ViewState": "AgIAAEwAAAAAAAAAAAAgwFsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-11T01:18:01.614Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ProductoModel.cs",
+              "DocumentMoniker": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Model\\ProductoModel.cs",
+              "RelativeDocumentMoniker": "API\\Model\\ProductoModel.cs",
+              "ToolTip": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Model\\ProductoModel.cs",
+              "RelativeToolTip": "API\\Model\\ProductoModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-11T01:00:42.415Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ProductosController.cs",
+              "DocumentMoniker": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Controllers\\ProductosController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\ProductosController.cs",
+              "ToolTip": "C:\\ProgramacionAvanzada\\sinpe-empresarial-aspnet\\sinpe-empresarial-aspnet\\API\\API\\Controllers\\ProductosController.cs",
+              "RelativeToolTip": "API\\Controllers\\ProductosController.cs",
+              "ViewState": "AgIAAEwAAAAAAAAAAAAgwFsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-11T00:54:42.118Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

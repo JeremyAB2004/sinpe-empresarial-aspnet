@@ -1,16 +1,12 @@
-﻿@model IEnumerable<sinpe_empresarial_aspnet.Models.Comercios>
-
-@{
+﻿@{
     ViewBag.Title = "Listado de Comercios";
 }
 
 <h2>Listado de Comercios</h2>
 
-<a class="btn btn-primary"
-   asp-action="Create"
-   role="button">Registrar Comercio</a>
+<a class="btn btn-primary" href="/Comercios/Create" role="button">Registrar Comercio</a>
 
-<table class="table table-striped">
+<table class="table table-striped mt-3" id="tblComercios">
     <thead>
         <tr>
             <th>Identificación</th>
@@ -23,48 +19,48 @@
             <th>Acciones</th>
         </tr>
     </thead>
-    <tbody>
-        @foreach (var comercio in Model)
-        {
-            <tr>
-                <td>@comercio.Identificacion</td>
-                <td>@(comercio.TipoIdentificacion == 1 ? "Física" : "Jurídica")</td>
-                <td>@comercio.Nombre</td>
-                <td>
-                    @if (comercio.TipoDeComercio == 1)
-                    {
-                        @("Restaurante")
-                    }
-                    else if (comercio.TipoDeComercio == 2)
-                    {
-                        @("Supermercado")
-                    }
-                    else if (comercio.TipoDeComercio == 3)
-                    {
-                        @("Ferretería")
-                    }
-                    else
-                    {
-                        @("Otro")
-                    }
-                </td>
-                <td>@comercio.Telefono</td>
-                <td>@comercio.CorreoElectronico</td>
-                <td>@(comercio.Estado ? "Activo" : "Inactivo")</td>
-                <td>
-                    <a class="btn btn-warning"
-                       asp-action="Edit" asp-route-id="@comercio.IdComercio"
-                       role="button">Editar</a>
-
-                    <a class="btn btn-success"
-                       asp-action="Details" asp-route-id="@comercio.IdComercio"
-                       role="button">Detalles</a>
-
-                    <a class="btn btn-info"
-                       asp-action="Index" asp-controller="Cajas" asp-route-idComercio="@comercio.IdComercio"
-                       role="button">Ver Cajas</a>
-                </td>
-            </tr>
-        }
-    </tbody>
+    <tbody id="bodyComercios"></tbody>
 </table>
+
+@section Scripts {
+    <script>
+        const API = "https://localhost:7004";
+
+        const tipoIdLabel = { 1: "Física", 2: "Jurídica" };
+        const tipoComLabel = { 1: "Restaurante", 2: "Supermercado", 3: "Ferretería", 4: "Otro" };
+
+        function cargarComercios() {
+            $.ajax({
+                url: `${API}/api/Comercios`,
+                method: "GET",
+                success: function(data) {
+                    let filas = "";
+                    data.forEach(c => {
+                        filas += `<tr>
+                                <td>${c.identificacion}</td>
+                                <td>${tipoIdLabel[c.tipoIdentificacion] ?? c.tipoIdentificacion}</td>
+                                <td>${c.nombre}</td>
+                                <td>${tipoComLabel[c.tipoDeComercio] ?? c.tipoDeComercio}</td>
+                                <td>${c.telefono}</td>
+                                <td>${c.correoElectronico}</td>
+                                <td>${c.estado ? "Activo" : "Inactivo"}</td>
+                                <td>
+                                    <a class="btn btn-warning btn-sm" href="/Comercios/Edit/${c.idComercio}">Editar</a>
+                                    <a class="btn btn-success btn-sm" href="/Comercios/Details/${c.idComercio}">Detalles</a>
+                                    <a class="btn btn-info btn-sm" href="/Cajas/Index/${c.idComercio}">Ver Cajas</a>
+                                </td>
+                            </tr>`;
+                    });
+                    $("#bodyComercios").html(filas);
+                },
+                error: function() {
+                    alert("Error al cargar los comercios.");
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            cargarComercios();
+        });
+    </script>
+}

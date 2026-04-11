@@ -1,6 +1,4 @@
-﻿@model List<sinpe_empresarial_aspnet.Models.BitacoraEventos>
-
-@{
+﻿@{
     ViewData["Title"] = "Bitácora de Eventos";
 }
 
@@ -19,41 +17,7 @@
             <th>Datos Posteriores</th>
         </tr>
     </thead>
-    <tbody>
-        @foreach (var e in Model)
-        {
-            <tr>
-                <td>@e.IdEvento</td>
-                <td>@e.TablaDeEvento</td>
-                <td>@e.TipoDeEvento</td>
-                <td>@e.FechaDeEvento.ToString("dd/MM/yyyy HH:mm:ss")</td>
-                <td>@e.DescripcionDeEvento</td>
-                <td style="max-width:150px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
-                    @e.StackTrace
-                </td>
-                <td>
-                    @if (!string.IsNullOrEmpty(e.DatosAnteriores))
-                    {
-                        <button class="btn btn-sm btn-warning"
-                                onclick="abrirModal(@e.IdEvento, 'anterior')">
-                            Ver
-                        </button>
-                    }
-                    else { <span class="text-muted">—</span> }
-                </td>
-                <td>
-                    @if (!string.IsNullOrEmpty(e.DatosPosteriores))
-                    {
-                        <button class="btn btn-sm btn-info"
-                                onclick="abrirModal(@e.IdEvento, 'posterior')">
-                            Ver
-                        </button>
-                    }
-                    else { <span class="text-muted">—</span> }
-                </td>
-            </tr>
-        }
-    </tbody>
+    <tbody id="bodyBitacora"></tbody>
 </table>
 
 <!-- Modal -->
@@ -73,76 +37,118 @@
 </div>
 
 @section Scripts {
-<script>
-    const eventos = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.Select(e => new {
-        id               = e.IdEvento,
-        tipo             = e.TipoDeEvento,
-        datosAnteriores  = e.DatosAnteriores,
-        datosPosteriores = e.DatosPosteriores
-    })));
+    <script>
+        const API = "https://localhost:7004";
+        let eventosCache = [];
 
-    function abrirModal(idEvento, modo) {
-        const ev = eventos.find(e => e.id === idEvento);
-        if (!ev) return;
-
-        const tieneAntes   = ev.datosAnteriores  && ev.datosAnteriores  !== 'null';
-        const tieneDespues = ev.datosPosteriores && ev.datosPosteriores !== 'null';
-        const esEditar     = ev.tipo?.toLowerCase() === 'editar' && tieneAntes && tieneDespues;
-
-        const titulo = document.getElementById('modalTitulo');
-        const cuerpo = document.getElementById('modalCuerpo');
-
-        if (esEditar) {
-            titulo.textContent = 'Comparación de cambios';
-            const antes   = parseJson(ev.datosAnteriores);
-            const despues = parseJson(ev.datosPosteriores);
-            cuerpo.innerHTML = renderComparacion(antes, despues);
-        } else if (modo === 'anterior') {
-            titulo.textContent = 'Datos Anteriores';
-            cuerpo.innerHTML = renderTabla(parseJson(ev.datosAnteriores));
-        } else {
-            titulo.textContent = 'Datos Posteriores';
-            cuerpo.innerHTML = renderTabla(parseJson(ev.datosPosteriores));
+        function formatFecha(f) {
+            return new Date(f).toLocaleString("es-CR");
         }
 
-        new bootstrap.Modal(document.getElementById('modalDatos')).show();
-    }
+        function cargarBitacora() {
+            $.ajax({
+                url: `${API}/api/Bitacora`,
+                method: "GET",
+                success: function(data) {
+                    eventosCache = data;
+                    let filas = "";
+                    data.forEach(e => {
+                        const tieneAntes = e.datosAnteriores && e.datosAnteriores !== "null";
+                        const tieneDespues = e.datosPosteriores && e.datosPosteriores !== "null";
 
-    function parseJson(str) {
-        try { return JSON.parse(str); } catch { return null; }
-    }
+                        filas += `<tr>
+                                <td>${e.idEvento}</td>
+                                <td>${e.tablaDeEvento}</td>
+                                <td>${e.tipoDeEvento}</td>
+                                <td>${formatFecha(e.fechaDeEvento)}</td>
+                                <td>${e.descripcionDeEvento}</td>
+                                <td style="max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+                                    ${e.stackTrace ?? ""}
+                                </td>
+                                <td>
+                                    ${tieneAntes
+                                ? `<button class="btn btn-sm btn-warning" onclick="abrirModal(${e.idEvento},'anterior')">Ver</button>`
+                                : '<span class="text-muted">—</span>'}
+                                </td>
+                                <td>
+                                    ${tieneDespues
+                                ? `<button class="btn btn-sm btn-info" onclick="abrirModal(${e.idEvento},'posterior')">Ver</button>`
+                                : '<span class="text-muted">—</span>'}
+                                </td>
+                            </tr>`;
+                    });
+                    $("#bodyBitacora").html(filas);
+                },
+                error: function() {
+                    alert("Error al cargar la bitácora.");
+                }
+            });
+        }
 
-    function formatVal(v) {
-        if (v === null || v === undefined) return '<em class="text-muted">null</em>';
-        if (typeof v === 'boolean') return v ? 'Activo' : 'Inactivo';
-        return String(v);
-    }
+        function abrirModal(idEvento, modo) {
+            const ev = eventosCache.find(e => e.idEvento === idEvento);
+            if (!ev) return;
 
-    function renderTabla(datos) {
-        if (!datos) return '<p class="text-muted">Sin datos disponibles.</p>';
-        const filas = Object.entries(datos).map(([k, v]) =>
-            `<tr><th>${k}</th><td>${formatVal(v)}</td></tr>`
-        ).join('');
-        return `<table class="table table-bordered table-sm">${filas}</table>`;
-    }
+            const tieneAntes = ev.datosAnteriores && ev.datosAnteriores !== "null";
+            const tieneDespues = ev.datosPosteriores && ev.datosPosteriores !== "null";
+            const esEditar = ev.tipoDeEvento?.toLowerCase() === "editar" && tieneAntes && tieneDespues;
 
-    function renderComparacion(antes, despues) {
-        if (!antes || !despues) return '<p class="text-muted">Datos insuficientes.</p>';
-        const keys = [...new Set([...Object.keys(antes), ...Object.keys(despues)])];
-        const filas = keys.map(k => {
-            const cambio = JSON.stringify(antes[k]) !== JSON.stringify(despues[k]);
-            return `<tr>
-                <th>${k}</th>
-                <td class="${cambio ? 'table-warning' : ''}">${formatVal(antes[k])}</td>
-                <td class="${cambio ? 'table-success' : ''}">${formatVal(despues[k])}</td>
-            </tr>`;
-        }).join('');
-        return `<table class="table table-bordered table-sm">
-            <thead class="table-dark">
-                <tr><th>Campo</th><th>Antes</th><th>Después</th></tr>
-            </thead>
-            <tbody>${filas}</tbody>
-        </table>`;
-    }
-</script>
+            const titulo = document.getElementById("modalTitulo");
+            const cuerpo = document.getElementById("modalCuerpo");
+
+            if (esEditar) {
+                titulo.textContent = "Comparación de cambios";
+                cuerpo.innerHTML = renderComparacion(parseJson(ev.datosAnteriores), parseJson(ev.datosPosteriores));
+            } else if (modo === "anterior") {
+                titulo.textContent = "Datos Anteriores";
+                cuerpo.innerHTML = renderTabla(parseJson(ev.datosAnteriores));
+            } else {
+                titulo.textContent = "Datos Posteriores";
+                cuerpo.innerHTML = renderTabla(parseJson(ev.datosPosteriores));
+            }
+
+            new bootstrap.Modal(document.getElementById("modalDatos")).show();
+        }
+
+        function parseJson(str) {
+            try { return JSON.parse(str); } catch { return null; }
+        }
+
+        function formatVal(v) {
+            if (v === null || v === undefined) return '<em class="text-muted">null</em>';
+            if (typeof v === "boolean") return v ? "Activo" : "Inactivo";
+            return String(v);
+        }
+
+        function renderTabla(datos) {
+            if (!datos) return '<p class="text-muted">Sin datos disponibles.</p>';
+            const filas = Object.entries(datos).map(([k, v]) =>
+                `<tr><th>${k}</th><td>${formatVal(v)}</td></tr>`
+            ).join("");
+            return `<table class="table table-bordered table-sm">${filas}</table>`;
+        }
+
+        function renderComparacion(antes, despues) {
+            if (!antes || !despues) return '<p class="text-muted">Datos insuficientes.</p>';
+            const keys = [...new Set([...Object.keys(antes), ...Object.keys(despues)])];
+            const filas = keys.map(k => {
+                const cambio = JSON.stringify(antes[k]) !== JSON.stringify(despues[k]);
+                return `<tr>
+                        <th>${k}</th>
+                        <td class="${cambio ? "table-warning" : ""}">${formatVal(antes[k])}</td>
+                        <td class="${cambio ? "table-success" : ""}">${formatVal(despues[k])}</td>
+                    </tr>`;
+            }).join("");
+            return `<table class="table table-bordered table-sm">
+                    <thead class="table-dark">
+                        <tr><th>Campo</th><th>Antes</th><th>Después</th></tr>
+                    </thead>
+                    <tbody>${filas}</tbody>
+                </table>`;
+        }
+
+        $(document).ready(function() {
+            cargarBitacora();
+        });
+    </script>
 }

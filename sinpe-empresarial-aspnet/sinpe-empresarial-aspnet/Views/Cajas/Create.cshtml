@@ -1,28 +1,56 @@
-﻿@model sinpe_empresarial_aspnet.Models.Cajas
+﻿@{
+    ViewBag.Title = "Registrar Caja";
+}
 
 <h2>Registrar Caja</h2>
 
-<form asp-action="Create" method="post">
-    <input type="hidden" asp-for="IdComercio" />
+<div id="alertaError" class="alert alert-danger d-none"></div>
 
-    <div class="mb-3">
-        <label class="form-label">Nombre</label>
-        <input class="form-control" asp-for="Nombre" />
-        <span class="text-danger" asp-validation-for="Nombre"></span>
-    </div>
+<div class="mb-3">
+    <label class="form-label">Nombre</label>
+    <input type="text" class="form-control" id="Nombre" />
+</div>
+<div class="mb-3">
+    <label class="form-label">Descripción</label>
+    <input type="text" class="form-control" id="Descripcion" />
+</div>
+<div class="mb-3">
+    <label class="form-label">Teléfono SINPE</label>
+    <input type="text" class="form-control" id="TelefonoSINPE" />
+</div>
+<div class="mb-3">
+    <a id="btnCancelar" href="#" class="btn btn-secondary">Cancelar</a>
+    <button class="btn btn-primary" id="btnGuardar">Guardar</button>
+</div>
 
-    <div class="mb-3">
-        <label class="form-label">Descripción</label>
-        <input class="form-control" asp-for="Descripcion" />
-        <span class="text-danger" asp-validation-for="Descripcion"></span>
-    </div>
+@section Scripts {
+    <script>
+        const API = "https://localhost:7004";
+        const idComercio = parseInt(window.location.pathname.split("/").pop());
 
-    <div class="mb-3">
-        <label class="form-label">Teléfono SINPE</label>
-        <input class="form-control" asp-for="TelefonoSINPE" />
-        <span class="text-danger" asp-validation-for="TelefonoSINPE"></span>
-    </div>
+        $("#btnCancelar").attr("href", `/Cajas/Index/${idComercio}`);
 
-    <button class="btn btn-primary" type="submit">Guardar</button>
-    <a class="btn btn-secondary" asp-action="Index" asp-route-idComercio="@Model.IdComercio">Cancelar</a>
-</form>
+        $("#btnGuardar").click(function() {
+            const caja = {
+                idComercio: idComercio,
+                nombre: $("#Nombre").val(),
+                descripcion: $("#Descripcion").val(),
+                telefonoSINPE: $("#TelefonoSINPE").val()
+            };
+
+            $.ajax({
+                url: `${API}/api/Cajas`,
+                method: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(caja),
+                success: function() {
+                    window.location.href = `/Cajas/Index/${idComercio}`;
+                },
+                error: function(xhr) {
+                    const msg = xhr.responseJSON?.mensaje ?? "Error al registrar la caja.";
+                    $("#alertaError").text(msg).removeClass("d-none");
+                }
+            });
+        });
+    </script>
+}

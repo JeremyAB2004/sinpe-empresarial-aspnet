@@ -1,13 +1,12 @@
 using Microsoft.EntityFrameworkCore;
-using sinpe_empresarial_aspnet.Business;
 using sinpe_empresarial_aspnet.Data;
-using sinpe_empresarial_aspnet.Repositories;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Views + Controllers
 builder.Services.AddControllersWithViews();
+
+// Base de datos (si aún la necesita el MVC para algo)
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseMySql(
@@ -18,45 +17,33 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     );
 });
 
-
-builder.Services.AddScoped<IComerciosRepository, ComerciosRepository>();
-builder.Services.AddScoped<ComerciosBusiness>();
-
-builder.Services.AddScoped<ICajasRepository, CajasRepository>();
-builder.Services.AddScoped<CajasBusiness>();
-
-builder.Services.AddScoped<ISinpeRepository, SinpeRepository>();
-builder.Services.AddScoped<SinpeBusiness>();
-
-builder.Services.AddScoped<IBitacoraRepository, BitacoraRepository>();
-builder.Services.AddScoped<BitacoraBusiness, BitacoraBusiness>();
-
-//Repositorio
-//CapaBussine
-//Nota:hacer uno de estos de sus partes
-
+// CORS para que jQuery pueda llamar al API desde el navegador
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("PermitirAPI", policy =>
+    {
+        policy.WithOrigins("https://localhost:7004")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.UseRouting();
-
+app.UseCors("PermitirAPI");
 app.UseAuthorization();
-
-app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
-    .WithStaticAssets();
-
+    pattern: "{controller=Comercios}/{action=Index}/{id?}");
 
 app.Run();

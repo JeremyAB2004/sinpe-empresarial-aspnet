@@ -1,99 +1,88 @@
-﻿@model sinpe_empresarial_aspnet.Models.Comercios
-
-@{
+﻿@{
     ViewBag.Title = "Registrar Comercio";
 }
 
 <h2>Registrar Comercio</h2>
 
-@if (TempData["Mensaje"] != null)
-{
-    <div class="alert alert-success">
-        @TempData["Mensaje"]
-    </div>
-    <a asp-action="Index"
-       class="btn btn-secondary"
-       role="button">Volver al listado</a>
-}
+<div id="alertaExito" class="alert alert-success d-none"></div>
+<div id="alertaError" class="alert alert-danger d-none"></div>
 
-<form asp-action="Create" method="post">
-
+<div id="formulario">
     <div class="mb-3">
-        <label for="" class="form-label">Identificación</label>
-        <input type="text"
-               class="form-control"
-               placeholder="Ingrese la identificación"
-               asp-for="Identificacion" />
-        <span asp-validation-for="Identificacion" class="text-danger"></span>
+        <label class="form-label">Identificación</label>
+        <input type="text" class="form-control" id="Identificacion" placeholder="Ingrese la identificación" />
     </div>
-
     <div class="mb-3">
-        <label for="" class="form-label">Tipo de Identificación</label>
-        <select class="form-control" asp-for="TipoIdentificacion">
+        <label class="form-label">Tipo de Identificación</label>
+        <select class="form-control" id="TipoIdentificacion">
             <option value="">-- Seleccione --</option>
             <option value="1">Física</option>
             <option value="2">Jurídica</option>
         </select>
-        <span asp-validation-for="TipoIdentificacion" class="text-danger"></span>
     </div>
-
     <div class="mb-3">
-        <label for="" class="form-label">Nombre</label>
-        <input type="text"
-               class="form-control"
-               placeholder="Ingrese el nombre"
-               asp-for="Nombre" />
-        <span asp-validation-for="Nombre" class="text-danger"></span>
+        <label class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="Nombre" placeholder="Ingrese el nombre" />
     </div>
-
     <div class="mb-3">
-        <label for="" class="form-label">Tipo de Comercio</label>
-        <select class="form-control" asp-for="TipoDeComercio">
+        <label class="form-label">Tipo de Comercio</label>
+        <select class="form-control" id="TipoDeComercio">
             <option value="">-- Seleccione --</option>
             <option value="1">Restaurante</option>
             <option value="2">Supermercado</option>
             <option value="3">Ferretería</option>
             <option value="4">Otro</option>
         </select>
-        <span asp-validation-for="TipoDeComercio" class="text-danger"></span>
     </div>
-
     <div class="mb-3">
-        <label for="" class="form-label">Teléfono</label>
-        <input type="text"
-               class="form-control"
-               placeholder="Ingrese el teléfono"
-               asp-for="Telefono" />
-        <span asp-validation-for="Telefono" class="text-danger"></span>
+        <label class="form-label">Teléfono</label>
+        <input type="text" class="form-control" id="Telefono" placeholder="Ingrese el teléfono" />
     </div>
-
     <div class="mb-3">
-        <label for="" class="form-label">Correo Electrónico</label>
-        <input type="text"
-               class="form-control"
-               placeholder="Ingrese el correo electrónico"
-               asp-for="CorreoElectronico" />
-        <span asp-validation-for="CorreoElectronico" class="text-danger"></span>
+        <label class="form-label">Correo Electrónico</label>
+        <input type="text" class="form-control" id="CorreoElectronico" placeholder="Ingrese el correo" />
     </div>
-
     <div class="mb-3">
-        <label for="" class="form-label">Dirección</label>
-        <input type="text"
-               class="form-control"
-               placeholder="Ingrese la dirección"
-               asp-for="Direccion" />
-        <span asp-validation-for="Direccion" class="text-danger"></span>
+        <label class="form-label">Dirección</label>
+        <input type="text" class="form-control" id="Direccion" placeholder="Ingrese la dirección" />
     </div>
-
     <div class="mb-3">
-        <a asp-action="Index"
-           class="btn btn-danger"
-           role="button">Cancelar</a>
-
-        <button type="submit"
-                class="btn btn-primary">
-            Registrar
-        </button>
+        <a href="/Comercios/Index" class="btn btn-danger">Cancelar</a>
+        <button class="btn btn-primary" id="btnRegistrar">Registrar</button>
     </div>
+</div>
 
-</form>
+@section Scripts {
+    <script>
+        const API = "https://localhost:7004";
+
+        $("#btnRegistrar").click(function() {
+            const comercio = {
+                identificacion: $("#Identificacion").val(),
+                tipoIdentificacion: parseInt($("#TipoIdentificacion").val()),
+                nombre: $("#Nombre").val(),
+                tipoDeComercio: parseInt($("#TipoDeComercio").val()),
+                telefono: $("#Telefono").val(),
+                correoElectronico: $("#CorreoElectronico").val(),
+                direccion: $("#Direccion").val()
+            };
+
+            $.ajax({
+                url: `${API}/api/Comercios`,
+                method: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(comercio),
+                success: function() {
+                    $("#alertaExito").text("Comercio registrado correctamente.").removeClass("d-none");
+                    $("#alertaError").addClass("d-none");
+                    $("#formulario input, #formulario select").val("");
+                },
+                error: function(xhr) {
+                    const msg = xhr.responseJSON?.mensaje ?? "Error al registrar el comercio.";
+                    $("#alertaError").text(msg).removeClass("d-none");
+                    $("#alertaExito").addClass("d-none");
+                }
+            });
+        });
+    </script>
+}

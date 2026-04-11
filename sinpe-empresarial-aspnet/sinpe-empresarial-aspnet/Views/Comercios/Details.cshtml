@@ -1,102 +1,87 @@
-﻿@model sinpe_empresarial_aspnet.Models.Comercios
-
-@{
+﻿@{
     ViewBag.Title = "Detalles Comercio";
 }
 
 <h2>Detalles del Comercio</h2>
 
-<form>
+<div class="mb-3">
+    <label class="form-label">Identificación</label>
+    <input type="text" class="form-control" id="Identificacion" disabled />
+</div>
+<div class="mb-3">
+    <label class="form-label">Tipo de Identificación</label>
+    <input type="text" class="form-control" id="TipoIdentificacion" disabled />
+</div>
+<div class="mb-3">
+    <label class="form-label">Nombre</label>
+    <input type="text" class="form-control" id="Nombre" disabled />
+</div>
+<div class="mb-3">
+    <label class="form-label">Tipo de Comercio</label>
+    <input type="text" class="form-control" id="TipoDeComercio" disabled />
+</div>
+<div class="mb-3">
+    <label class="form-label">Teléfono</label>
+    <input type="text" class="form-control" id="Telefono" disabled />
+</div>
+<div class="mb-3">
+    <label class="form-label">Correo Electrónico</label>
+    <input type="text" class="form-control" id="CorreoElectronico" disabled />
+</div>
+<div class="mb-3">
+    <label class="form-label">Dirección</label>
+    <input type="text" class="form-control" id="Direccion" disabled />
+</div>
+<div class="mb-3">
+    <label class="form-label">Fecha de Registro</label>
+    <input type="text" class="form-control" id="FechaDeRegistro" disabled />
+</div>
+<div class="mb-3">
+    <label class="form-label">Fecha de Modificación</label>
+    <input type="text" class="form-control" id="FechaDeModificacion" disabled />
+</div>
+<div class="mb-3">
+    <label class="form-label">Estado</label>
+    <input type="text" class="form-control" id="Estado" disabled />
+</div>
+<div class="mb-3">
+    <a id="btnEditar" href="#" class="btn btn-warning">Editar</a>
+    <a href="/Comercios/Index" class="btn btn-danger">Volver</a>
+</div>
 
-    <div class="mb-3">
-        <label for="" class="form-label">Identificación</label>
-        <input type="text"
-               class="form-control"
-               asp-for="Identificacion"
-               disabled />
-    </div>
+@section Scripts {
+    <script>
+        const API = "https://localhost:7004";
 
-    <div class="mb-3">
-        <label for="" class="form-label">Tipo de Identificación</label>
-        <input type="text"
-               class="form-control"
-               value="@(Model.TipoIdentificacion == 1 ? "Física" : "Jurídica")"
-               disabled />
-    </div>
+        const tipoIdLabel = { 1: "Física", 2: "Jurídica" };
+        const tipoComLabel = { 1: "Restaurante", 2: "Supermercado", 3: "Ferretería", 4: "Otro" };
 
-    <div class="mb-3">
-        <label for="" class="form-label">Nombre</label>
-        <input type="text"
-               class="form-control"
-               asp-for="Nombre"
-               disabled />
-    </div>
+        const idComercio = parseInt(window.location.pathname.split("/").pop());
 
-    <div class="mb-3">
-        <label for="" class="form-label">Tipo de Comercio</label>
-        <input type="text"
-               class="form-control"
-               value="@(Model.TipoDeComercio == 1 ? "Restaurante" : Model.TipoDeComercio == 2 ? "Supermercado" : Model.TipoDeComercio == 3 ? "Ferretería" : "Otro")"
-               disabled />
-    </div>
+        function formatFecha(f) {
+            if (!f) return "N/A";
+            return new Date(f).toLocaleDateString("es-CR", {
+                day: "2-digit", month: "2-digit", year: "numeric",
+                hour: "2-digit", minute: "2-digit"
+            });
+        }
 
-    <div class="mb-3">
-        <label for="" class="form-label">Teléfono</label>
-        <input type="text"
-               class="form-control"
-               asp-for="Telefono"
-               disabled />
-    </div>
-
-    <div class="mb-3">
-        <label for="" class="form-label">Correo Electrónico</label>
-        <input type="text"
-               class="form-control"
-               asp-for="CorreoElectronico"
-               disabled />
-    </div>
-
-    <div class="mb-3">
-        <label for="" class="form-label">Dirección</label>
-        <input type="text"
-               class="form-control"
-               asp-for="Direccion"
-               disabled />
-    </div>
-
-    <div class="mb-3">
-        <label for="" class="form-label">Fecha de Registro</label>
-        <input type="text"
-               class="form-control"
-               value="@Model.FechaDeRegistro.ToString("dd/MM/yyyy HH:mm")"
-               disabled />
-    </div>
-
-    <div class="mb-3">
-        <label for="" class="form-label">Fecha de Modificación</label>
-        <input type="text"
-               class="form-control"
-               value="@(Model.FechaDeModificacion.HasValue ? Model.FechaDeModificacion.Value.ToString("dd/MM/yyyy HH:mm") : "N/A")"
-               disabled />
-    </div>
-
-    <div class="mb-3">
-        <label for="" class="form-label">Estado</label>
-        <input type="text"
-               class="form-control"
-               value="@(Model.Estado ? "Activo" : "Inactivo")"
-               disabled />
-    </div>
-
-    <div class="mb-3">
-        <a asp-action="Edit"
-           asp-route-id="@Model.IdComercio"
-           class="btn btn-warning"
-           role="button">Editar</a>
-
-        <a asp-action="Index"
-           class="btn btn-danger"
-           role="button">Volver</a>
-    </div>
-
-</form>
+        $.ajax({
+            url: `${API}/api/Comercios/${idComercio}`,
+            method: "GET",
+            success: function(c) {
+                $("#Identificacion").val(c.identificacion);
+                $("#TipoIdentificacion").val(tipoIdLabel[c.tipoIdentificacion] ?? c.tipoIdentificacion);
+                $("#Nombre").val(c.nombre);
+                $("#TipoDeComercio").val(tipoComLabel[c.tipoDeComercio] ?? c.tipoDeComercio);
+                $("#Telefono").val(c.telefono);
+                $("#CorreoElectronico").val(c.correoElectronico);
+                $("#Direccion").val(c.direccion);
+                $("#FechaDeRegistro").val(formatFecha(c.fechaDeRegistro));
+                $("#FechaDeModificacion").val(formatFecha(c.fechaDeModificacion));
+                $("#Estado").val(c.estado ? "Activo" : "Inactivo");
+                $("#btnEditar").attr("href", `/Comercios/Edit/${c.idComercio}`);
+            }
+        });
+    </script>
+}

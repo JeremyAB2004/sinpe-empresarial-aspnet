@@ -1,46 +1,87 @@
-﻿@model sinpe_empresarial_aspnet.Models.Sinpe
+﻿@{
+    ViewBag.Title = "Registrar Pago SINPE";
+}
 
 <h2>Registrar Pago SINPE</h2>
 
-<form asp-action="Registrar" method="post">
+<div id="alertaExito" class="alert alert-success d-none"></div>
+<div id="alertaError" class="alert alert-danger d-none"></div>
 
-	<div>
-		<label>Telefono Origen</label>
-		<input asp-for="TelefonoOrigen" />
-	</div>
+<div class="mb-3">
+    <label class="form-label">Teléfono Origen</label>
+    <input type="text" class="form-control" id="TelefonoOrigen" placeholder="Ej: 88887777" />
+</div>
+<div class="mb-3">
+    <label class="form-label">Nombre Origen</label>
+    <input type="text" class="form-control" id="NombreOrigen" placeholder="Nombre del remitente" />
+</div>
+<div class="mb-3">
+    <label class="form-label">Teléfono Destinatario</label>
+    <input type="text" class="form-control" id="TelefonoDestinatario" placeholder="Ej: 77778888" />
+</div>
+<div class="mb-3">
+    <label class="form-label">Nombre Destinatario</label>
+    <input type="text" class="form-control" id="NombreDestinatario" placeholder="Nombre del destinatario" />
+</div>
+<div class="mb-3">
+    <label class="form-label">Monto (₡)</label>
+    <input type="number" step="0.01" class="form-control" id="Monto" placeholder="0.00" />
+</div>
+<div class="mb-3">
+    <label class="form-label">Descripción</label>
+    <input type="text" class="form-control" id="Descripcion" placeholder="Opcional" />
+</div>
+<div class="mb-3">
+    <a href="/Cajas/Index" class="btn btn-secondary">Cancelar</a>
+    <button class="btn btn-primary" id="btnRegistrar">Registrar Pago</button>
+</div>
 
-	<div>
-		<label>Nombre Origen</label>
-		<input asp-for="NombreOrigen" />
-	</div>
+@section Scripts {
+    <script>
+        const API = "https://localhost:7004";
 
-	<div>
-		<label>Telefono Destinatorio</label>
-		<input asp-for="TelefonoDestinatario" />
-	</div>
+        $("#btnRegistrar").click(function() {
+            const monto = parseFloat($("#Monto").val());
 
-	<div>
-		<label>Nombre Destinatorio</label>
-		<input asp-for="NombreDestinatario" />
-	</div>
+            if (!$("#TelefonoOrigen").val() || !$("#NombreOrigen").val() ||
+                !$("#TelefonoDestinatario").val() || !$("#NombreDestinatario").val() ||
+                isNaN(monto) || monto <= 0) {
+                $("#alertaError").text("Por favor complete todos los campos obligatorios y un monto válido.").removeClass("d-none");
+                $("#alertaExito").addClass("d-none");
+                return;
+            }
 
-	<div>
-		<label>Monto</label>
-		<input asp-for="Monto" type="number" step="0.01" />
-	</div>
+            const sinpe = {
+                telefonoOrigen: $("#TelefonoOrigen").val(),
+                nombreOrigen: $("#NombreOrigen").val(),
+                telefonoDestinatario: $("#TelefonoDestinatario").val(),
+                nombreDestinatario: $("#NombreDestinatario").val(),
+                monto: monto,
+                descripcion: $("#Descripcion").val() || null
+            };
 
-	<div>
-		<label>Descripcion </label>
-		<input asp-for="Descripcion" />
-	</div>
+            $("#btnRegistrar").prop("disabled", true).text("Registrando...");
 
-	<button type="submit">Registrar Pago</button>
-</form>
-
-@if (!ViewData.ModelState.IsValid)
-{
-	<div style="color:red;">
-		@Html.ValidationSummary()
-	</div>
+            $.ajax({
+                url: `${API}/api/Sinpe`,
+                method: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(sinpe),
+                success: function() {
+                    $("#alertaExito").text("Pago SINPE registrado correctamente.").removeClass("d-none");
+                    $("#alertaError").addClass("d-none");
+                    // Limpiar formulario
+                    $("#TelefonoOrigen, #NombreOrigen, #TelefonoDestinatario, #NombreDestinatario, #Monto, #Descripcion").val("");
+                },
+                error: function(xhr) {
+                    const msg = xhr.responseJSON?.mensaje ?? "Error al registrar el pago SINPE.";
+                    $("#alertaError").text(msg).removeClass("d-none");
+                    $("#alertaExito").addClass("d-none");
+                },
+                complete: function() {
+                    $("#btnRegistrar").prop("disabled", false).text("Registrar Pago");
+                }
+            });
+        });
+    </script>
 }
-
